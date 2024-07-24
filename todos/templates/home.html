@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                {{ todo.title }} - {% if todo.is_done %} Done {% else %} Not Done {% endif %}
+                {% if not todo.is_done %}
+                    <form action="{% url 'mark_todo_done' todo.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Mark as Done</button>
+                    </form>
+                {% endif %}
+                <a href="{% url 'edit_todo' todo.id %}">Edit</a>
+                <form action="{% url 'delete_todo' todo.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_todo' %}">Create New Todo</a>
+    
+</body>
+</html>

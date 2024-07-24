@@ -1,27 +1,21 @@
-"""
-URL configuration for todo project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from todos.views import *
 from django.urls import path
+from todos import views
 
-
+# urlpatterns = [
+#     path('home/', views.home, name='home'),
+#     path('register/', views.signUp, name='register'),
+#     path('login/', views.loginPage, name='login'),
+#     path('logout/', views.logoutPage, name='logout'),
+#     path('create/', views.create_todo),
+#     path('edit/<int:todo_id>/', views.edit_todo),
+#     path('delete/<int:todo_id>/', views.delete_todo),
+# ]
 urlpatterns = [
-    path('admin', todo_list, name='todo_list'),
-
-    path('todos/', todo_list, name='todo_list'),
-    path('todos/mark_todo_done/', mark_todo_done, name='mark_todo_done'),
+    path('', views.home, name='home'),
+    path('create/', views.create_todo, name='create_todo'),  # Update to match the pattern you want
+    path('edit/', views.edit_todo, name='edit_todo'),  # Update to match the pattern you want
+    path('delete/<int:todo_id>/', views.delete_todo, name='delete_todo'),  # Update to match the pattern you want
+    path('register/', views.signUp, name='register'),
+    path('login/', views.loginPage, name='login'),
+    path('logout/', views.logoutPage, name='logout'),  # Ensure you have a logout view if using this URL
 ]
