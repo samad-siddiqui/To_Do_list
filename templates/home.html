@@ -23,7 +23,7 @@
             <th scope="col">Sr. No</th>
             <th scope="col">Title</th>
             <th scope="col">Description</th>
-            <th scope="col">Mark as Done</th>
+            <th scope="col">Status</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -40,7 +40,8 @@
                           <button type="submit" class="btn btn-primary">Mark as Done</button>
                       </form>
                   {% else %}
-                      Done
+                  <span class="badge bg-success">Done</span>
+                    
                   {% endif %}
               </td>
               <td>
