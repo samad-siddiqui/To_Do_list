@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 {%block start%}
-<nav class="navbar bg-body-tertiary">
+ <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand">Seacrh</a>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <a class="navbar-brand">ToDo</a>
+    <form method="GET" action="{% url 'home' %}" class="d-flex">
+      <input class="form-control me-2" type="text" name = "q" placeholder="Search todo" aria-label="Search" value="{{ request.GET.q }}">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
-</nav>
+</nav> 
     <h1 class='text-center'>Todo List</h1>
     <hr>
-
-    <div class="container">
-        
-  
+    
+    <div class="container">  
     <table class="table" class="container">
         <thead>
           <tr>
