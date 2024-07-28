@@ -28,19 +28,33 @@
           </tr>
         </thead>
         <body>
-            {% for todo in todos %}
-           <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{todo.title }}</td>
-            <td>{{ todo.description }}</td>
-            <td></td>
-            <td></td>
-          </tr> 
-          {% endfor %}
-          
+          {% for todo in todos %}
+          <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ todo.title }}</td>
+              <td>{{ todo.description }}</td>
+              <td>
+                  {% if not todo.is_done %}
+                      <form action="{% url 'mark_todo_done' todo.id %}" method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary">Mark as Done</button>
+                      </form>
+                  {% else %}
+                      Done
+                  {% endif %}
+              </td>
+              <td>
+                  <a href="{% url 'edit_todo' todo.id %}" class="btn btn-warning">Edit</a>
+                  <form action="{% url 'delete_todo' todo.id %}" method="POST" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+              </td>
+          </tr>
+      {% endfor %}
         </tbody>
       </table>
-     <a href="{% url 'create_todo' %}" class='btn btn-secondary'>Create New Todo</a>
+     <a href="{% url 'create' %}" class='btn btn-secondary'>Create New Todo</a>
      ||
      <a href="{% url 'logout' %}" class='btn btn-secondary'>logout</a>
     </div>

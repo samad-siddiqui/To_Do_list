@@ -9,16 +9,7 @@ def home(request):
     return render(request, 'home.html',{'todos': Todo.objects.all()})
   
 @login_required(login_url='login')
-def create_todo(request):
-    if request.method == "POST":
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        todo = Todo(user=request.user, title=title, description=description)
-        todo.save()
-        return redirect('home')
-    return render(request, 'create.html')
-
-def mark_todo_done(todo_id):
+def mark_todo_done(request,todo_id):
     todo = Todo.objects.get(id=todo_id)
     todo.is_done = True
     todo.save()
