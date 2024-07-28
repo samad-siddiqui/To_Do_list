@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-
 from todos.models import Todo
 
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'home.html',{'todos': Todo.objects.all()})
+    return render(request, 'home.html',{'page': 'home','todos': Todo.objects.all()})
   
 @login_required(login_url='login')
 def mark_todo_done(request,todo_id):

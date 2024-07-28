@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Todo</title>
-</head>
-<body>
+{%extends "base.html"%}
+{% block start%}
     <h1>Edit Todo</h1>
     <form method="POST">
         {% csrf_token %}
@@ -14,5 +10,4 @@
         <button type="submit">Save</button>
     </form>
     <a href="{% url 'home' %}">Back to Todo List</a>
-</body>
-</html>
+{%endblock%}
