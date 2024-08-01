@@ -15,6 +15,8 @@ def createpage(request):
             title = request.POST.get('title')
             description = request.POST.get('description')
             todo = Todo(user=request.user, title=title, description=description)
-        todo.save()
+            todo.save()
         return redirect('home')
-    return render(request, 'create.html')
+    else:
+        form = CreateForm()
+        return render(request, 'create.html', {'form': form})

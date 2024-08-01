@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{%block start%}
+{% block title %}Home page Todo - Todo App{% endblock %}
+
+{%block content%}
+
  <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand">ToDo</a>
@@ -31,22 +34,16 @@
               <td>{{ todo.title }}</td>
               <td>{{ todo.description }}</td>
               <td>
-                  {% if not todo.is_done %}
-                      <form action="{% url 'mark_todo_done' todo.id %}" method="POST">
-                          {% csrf_token %}
-                          <button type="submit" class="btn btn-primary">Mark as Done</button>
-                      </form>
-                  {% else %}
-                  <span class="badge bg-success">Done</span>
-                    
-                  {% endif %}
+                <form action="{% url 'mark_todo_done' todo.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" {% if todo.is_done %}checked{% endif %} onclick="this.form.submit()">
+                    </div>
+                </form>
               </td>
               <td>
                   <a href="{% url 'edit_todo' todo.id %}" class="btn btn-warning">Edit</a>
-                  <form action="{% url 'delete_todo' todo.id %}" method="POST" style="display:inline;">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-danger">Delete</button>
-                  </form>
+                  <a href="{% url 'delete_todo' todo.id %}" class="btn btn-warning">Delete</a>
               </td>
           </tr>
       {% endfor %}
@@ -55,5 +52,7 @@
      <a href="{% url 'create' %}" class='btn btn-secondary'>Create New Todo</a>
      ||
      <a href="{% url 'logout' %}" class='btn btn-secondary'>logout</a>
+     ||
+     <a href="{% url 'done' %}" class='btn btn-secondary'>View Done ToDo</a> 
     </div>
 {%endblock%}

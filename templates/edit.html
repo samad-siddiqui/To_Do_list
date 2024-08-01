@@ -1,12 +1,25 @@
 {%extends "base.html"%}
-{% block start%}
+{% block title %}Edit Todo - Todo App{% endblock %}
+{% block content%}
     <h1>Edit Todo</h1>
     <form method="POST">
         {% csrf_token %}
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" value="{{ todo.title }}" required><br><br>
-        <label for="description">Description:</label>
-        <textarea name="description" id="description">{{ todo.description }}</textarea><br><br>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">Title</th>
+                    <td>{{ form.title }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td>{{ form.description }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td>{{ form.is_done }}</td>
+                </tr>
+            </tbody>
+        </table>
         <button type="submit">Save</button>
     </form>
     <a href="{% url 'home' %}">Back to Todo List</a>
