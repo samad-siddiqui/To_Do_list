@@ -6,7 +6,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('crt/', include('create_todo.urls')),
+    path('crt/', views.createpage, name='create'),
     path('done/', views.done_todo, name='done'),
     path('mark-done/<int:todo_id>/', views.mark_todo_done, name='mark_todo_done'), 
     path('edit/<int:todo_id>/', views.edit_todo, name='edit_todo'), 

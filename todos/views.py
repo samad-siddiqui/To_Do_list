@@ -14,6 +14,19 @@ def home(request):
     else:
         todos = Todo.objects.all()
     return render(request, 'home.html', {'todos': todos})
+def createpage(request):
+    """Create a new todo"""
+    if request.method == "POST":
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            title = request.POST.get('title')
+            description = request.POST.get('description')
+            todo = Todo(user=request.user, title=title, description=description)
+            todo.save()
+        return redirect('home')
+    else:
+        form = TodoForm()
+        return render(request, 'create.html', {'form': form})
 @login_required(login_url='login')
 def mark_todo_done(request,todo_id):
     '''Mark todo as done.'''

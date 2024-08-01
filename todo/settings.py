@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'todos',  
     'authentication',
     'registration',
-    'create_todo',
 ]
 
 
