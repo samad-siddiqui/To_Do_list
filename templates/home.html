@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Home page Todo - Todo App{% endblock %}
+
+{%block content%}
+
+ <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand">ToDo</a>
+    <form method="GET" action="{% url 'home' %}" class="d-flex">
+      <input class="form-control me-2" type="text" name = "q" placeholder="Search todo" aria-label="Search" value="{{ request.GET.q }}">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav> 
+    <h1 class='text-center'>Todo List</h1>
+    <hr>
+    
+    <div class="container">  
+    <table class="table" class="container">
+        <thead>
+          <tr>
+            <th scope="col">Sr. No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <body>
+          
+          {% for todo in todos %}
+          <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ todo.title }}</td>
+              <td>{{ todo.description }}</td>
+              <td>
+                <form action="{% url 'mark_todo_done' todo.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" {% if todo.is_done %}checked{% endif %} onclick="this.form.submit()">
+                    </div>
+                </form>
+              </td>
+              <td>
+                  <a href="{% url 'edit_todo' todo.id %}" class="btn btn-warning">Edit</a>
+                  <a href="{% url 'delete_todo' todo.id %}" class="btn btn-warning">Delete</a>
+              </td>
+          </tr>
+      {% endfor %}
+        </tbody>
+      </table>
+     <a href="{% url 'create' %}" class='btn btn-secondary'>Create New Todo</a>
+     ||
+     <a href="{% url 'logout' %}" class='btn btn-secondary'>logout</a>
+     ||
+     <a href="{% url 'done' %}" class='btn btn-secondary'>View Done ToDo</a> 
+    </div>
+{%endblock%}

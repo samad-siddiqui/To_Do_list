@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+{% block title %}View Done Todos - Todo App{% endblock %}
+
+{% block content%}
+
+<div class="container">  
+    <table class="table" class="container">
+        <thead>
+          <tr>
+            <th scope="col">Sr. No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.description }}</td>
+                <td>
+                    <form action="{% url 'mark_todo_done' todo.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" {% if todo.is_done %}checked{% endif %} onclick="this.form.submit()">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+        <div class="text-center">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Todo List</a>
+            <a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a>
+        </div>
+
+{%endblock%}

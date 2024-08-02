@@ -1,0 +1,14 @@
+{%extends "base2.html"%}
+{% block title %}Signup for Todo - Todo App{% endblock %}
+{%block content%}
+    <div class="background">
+        
+        <form method="POST">
+            <h1 class="text-center">Signup</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Signup</button>
+            <a href="{% url 'login' %}">Already have account?</a>
+        </form>
+    </div>
+{%endblock%}
