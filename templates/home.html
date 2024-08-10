@@ -43,7 +43,7 @@
               </td>
               <td>
                   <a href="{% url 'edit_todo' todo.id %}" class="btn btn-warning">Edit</a>
-                  <a href="{% url 'delete_todo' todo.id %}" class="btn btn-warning">Delete</a>
+                  <a href="{% url 'delete_todo' todo.pk %}" class="btn btn-warning">Delete</a>
               </td>
           </tr>
       {% endfor %}
