@@ -1,15 +1,15 @@
-
-from todos import views
+"""Import the specified module"""
 from django.contrib import admin
 from django.urls import include, path
-
-
+from todos.views import HomeView, CreatePage, UpdatePage, DeleteTodo, MarkDoneTodo, DoneTodo
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('create/', views.create_todo, name='create_todo'), 
-    path('edit/', views.edit_todo, name='edit_todo'), 
-    path('delete/<int:todo_id>/', views.delete_todo, name='delete_todo'),
+    path('', HomeView.as_view(), name='home'),
+    path('create-todo/', CreatePage.as_view(), name='create'),
+    path('done/', DoneTodo.as_view(), name='done'),
+    path('mark-done/<int:pk>/', MarkDoneTodo.as_view(), name='mark_todo_done'), 
+    path('edit-todo/<int:pk>/', UpdatePage.as_view(), name='edit_todo'), 
+    path('delete-todo/<int:pk>/', DeleteTodo.as_view(), name='delete_todo'),
     path('auth/',include('authentication.urls')),
-    path('register/', include('registration.urls')),
+    path('regis/', include('registration.urls')),
 ]
